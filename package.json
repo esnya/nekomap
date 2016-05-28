@@ -1,0 +1,77 @@
+{
+  "name": "nekovision",
+  "version": "0.0.0",
+  "description": "Online map editor for Tabletop-RPG",
+  "main": "index.js",
+  "scripts": {
+    "build": "run-p -l build:*",
+    "build:babel": "babel -s true -d lib src",
+    "build:webpack": "webpack",
+    "lint": "npm run test:lint",
+    "test": "run-p -l test:*",
+    "test:lint": "eslint .",
+    "test:jest": "jest",
+    "start": "node .",
+    "watch": "run-p -l watch:*",
+    "watch:bael": "babel -w -s true -d lib src",
+    "watch:eslint": "nodemon ./node_modules/eslint/bin/eslint.js .",
+    "watch:server": "nodemon ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ukatama/nekovision.git"
+  },
+  "author": "ukatama",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ukatama/nekovision/issues"
+  },
+  "homepage": "https://github.com/ukatama/nekovision#readme",
+  "devDependencies": {
+    "babel-cli": "^6.9.0",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-2": "^6.5.0",
+    "coveralls": "^2.11.9",
+    "eslint": "^2.11.0",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.8.1",
+    "eslint-plugin-jsx-a11y": "^1.2.2",
+    "eslint-plugin-react": "^5.1.1",
+    "jest-cli": "^12.1.1",
+    "nodemon": "^1.9.2",
+    "npm-run-all": "^2.1.1",
+    "webpack": "^1.13.1"
+  },
+  "dependencies": {
+    "config": "^1.20.4",
+    "express": "^4.13.4",
+    "jade": "^1.11.0",
+    "log4js": "^0.6.36",
+    "material-ui": "^0.15.0",
+    "react": "^15.1.0",
+    "react-addons-test-utils": "^15.1.0",
+    "react-dom": "^15.1.0",
+    "react-redux": "^4.4.5",
+    "react-tap-event-plugin": "^1.0.0",
+    "redis": "^2.6.0-2",
+    "redux": "^3.5.2",
+    "redux-actions": "^0.9.1",
+    "redux-promise": "^0.5.3",
+    "socket.io": "^1.4.6",
+    "socket.io-client": "^1.4.6",
+    "source-map-support": "^0.4.0"
+  },
+  "jest": {
+      "collectCoverage": true,
+      "coverageReporters": ["text", "lcov", "clover"],
+      "unmockedModulePathPatterns": [
+          "<rootDir>/node_modules/bluebird",
+          "<rootDir>/node_modules/lodash",
+          "<rootDir>/node_modules/react",
+          "<rootDir>/node_modules/react-addons-test-utils",
+          "<rootDir>/node_modules/react-dom"
+      ]
+  }
+}
