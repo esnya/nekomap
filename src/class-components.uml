@@ -1,0 +1,131 @@
+@startuml
+enum ObjectType {
+    -- 3D Primitives --
+    CONE
+    CUBOID
+    CYLINDER
+    SPHERE
+    -- 2D Primitives --
+    CIRCLE
+    ELLIPSE
+    LINE
+    POLYLINE
+    POLYGON
+    RECTANGLE
+    -- Others --
+    CHARACTER
+    TEXT
+}
+
+enum ModeType {
+    VIEW
+    CREATE
+    EDIT
+}
+
+enum ManipulatorType {
+    ROTATE
+    SCALE
+    TRANSALATE
+}
+
+class Vector <<struct>> {
+    +x : Number
+    +y : Number
+    +z : Number
+}
+
+namespace actions {
+    namespace object {
+    }
+    namespace mode {
+    }
+    namespace editor {
+    }
+}
+
+namespace components {
+    class App {
+        +constructor({ title : String })
+    }
+
+    class Toolbar {
+        +constructor({})
+    }
+
+    App "1" *-- "1" Canvas
+    App "1" *-- "1" Toolbar
+
+    class ModePalette {
+        +constructor({ mode : ModeType })
+    }
+    ModePalette --> actions.mode.Mode
+
+    class ObjectPalette {
+        +constructor({ type : ObjectType })
+    }
+    ObjectPalette --> actions.editor.type
+
+    class ManipulatorPalette {
+        +constructor({ manipulator : ManipulatorType })
+    }
+    ManipulatorPalette --> actions.editor.manipulator
+
+    Toolbar "1" *-- "1" ModePalette
+    Toolbar "1" *-- "1" ObjectPalette
+    Toolbar "1" *-- "1" ManipulatorPalette
+
+    class Canvas {
+        -renderer : THREE.Renderer
+        +constructor({ mode : String, editor : Object, scene : THREE.Scene, camera : THREE.Camera })
+    }
+    Canvas "1" *-- "1" THREE.Renderer
+    Canvas --> actions.object.Create : if mode is CREATE
+    Canvas --> actions.object.Rotate : if mode is EDIT and editor.manipulator is ROTATE
+    Canvas --> actions.object.Scale : if mode is EDIT and editor.manipulator is SCALE
+    Canvas --> actions.object.Translate : if mode is EDIT and editor.manipulator is TRANSALATE
+}
+
+namespace graphics {
+    class Obj {
+        +id : String
+        +type : ObjectType
+        +position : Vector
+        +size : Vector
+        +rotation : Vector
+        +text : String
+        +timestamp : Number
+    }
+    THREE.Mesh <|.. Obj
+}
+
+package THREE {
+    class Scene {
+        +add(mesh : Mesh)
+    }
+
+    class Camera {
+    }
+
+    class Geometry {
+    }
+
+    class Material {
+    }
+
+    class Mesh {
+        +position : Vector
+        +rotation : Vector
+    }
+
+    class Renderer {
+        +render(scene : Scene, camera : Camera)
+    }
+
+    Mesh "1" o-- "1" Geometry
+    Mesh "1" o-- "1" Material
+
+    Scene "1" o-- "0..*" Mesh
+}
+
+@enduml

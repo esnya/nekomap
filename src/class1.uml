@@ -1,0 +1,72 @@
+@startuml
+
+enum ObjctType {
+    -- 3D Primitives --
+    CONE
+    CUBOID
+    CYLINDER
+    SPHERE
+    -- 2D Primitives --
+    CIRCLE
+    ELLIPSE
+    LINE
+    POLYLINE
+    POLYGON
+    RECTANGLE
+    -- Others --
+    CHARACTER
+    TEXT
+}
+
+class Vector <<struct>> {
+    +x : Number
+    +y : Number
+    +z : Number
+}
+
+class Client {
+    +room : Room
+    +camera : Camera
+}
+
+class Camera {
+    +rotate(vector : Vector)
+    +translate(vector : Vector)
+}
+
+class Room {
+    +size : Vector
+    +ground : Ground
+    +objects : Object[]
+
+    +setSize(size : Vector)
+}
+
+class Ground {
+    +heights : Number[][]
+    +setHeight(x : Number, z : Number, hight : Number)
+    +draw()
+}
+
+class Object {
+    +type : ObjectType
+    +position : Vector
+    +size : Vector
+
+    +constructor(type : Type, position : Position)
+    +setAngle(angle : Number)
+    +setPosition(position : Vector)
+    +setSize(size : Vector)
+    +draw()
+}
+
+Client "0..*" o-- "1" Room
+Client "1" *-- "1" Camera
+
+Room "1" *-- "1" Ground
+Room "1" *-- "0..*" Object
+
+Ground <-- Client : draw
+Object <-- Client : draw
+
+@enduml
