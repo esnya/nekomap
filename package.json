@@ -9,13 +9,17 @@
     "build:webpack": "webpack",
     "lint": "npm run test:lint",
     "test": "run-p -l test:*",
-    "test:lint": "eslint .",
-    "test:jest": "jest",
+    "test:eslint": "eslint --color --ignore-pattern **/__tests__/**/* --ignore-pattern scripts/**/* .",
+    "test:eslint-jest": "eslint --color -c ./.eslintrc.jest.yml ./src/**/__tests__/**/*",
+    "test:jest": "jest --color",
     "start": "node .",
     "watch": "run-p -l watch:*",
     "watch:bael": "babel -w -s true -d lib src",
-    "watch:eslint": "nodemon ./node_modules/eslint/bin/eslint.js .",
-    "watch:server": "nodemon ./index.js"
+    "watch:eslint": "nodemon ./node_modules/eslint/bin/eslint.js --color --ignore-pattern **/__tests__/**/* --ignore-pattern scripts/**/* .",
+    "watch:eslint-jest": "nodemon ./node_modules/eslint/bin/eslint.js --color -c ./.eslintrc.jest.yml ./src/**/__tests__/**/*",
+    "watch:jest": "node ./scripts/jest.js --color --watch",
+    "watch:server": "nodemon ./index.js",
+    "watch:webpack": "webpack --watch"
   },
   "repository": {
     "type": "git",
@@ -29,6 +33,7 @@
   "homepage": "https://github.com/ukatama/nekovision#readme",
   "devDependencies": {
     "babel-cli": "^6.9.0",
+    "babel-jest": "^12.1.0",
     "babel-loader": "^6.2.4",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
@@ -61,17 +66,23 @@
     "redux-promise": "^0.5.3",
     "socket.io": "^1.4.6",
     "socket.io-client": "^1.4.6",
-    "source-map-support": "^0.4.0"
+    "source-map-support": "^0.4.0",
+    "three": "^0.77.1"
   },
   "jest": {
-      "collectCoverage": true,
-      "coverageReporters": ["text", "lcov", "clover"],
-      "unmockedModulePathPatterns": [
-          "<rootDir>/node_modules/bluebird",
-          "<rootDir>/node_modules/lodash",
-          "<rootDir>/node_modules/react",
-          "<rootDir>/node_modules/react-addons-test-utils",
-          "<rootDir>/node_modules/react-dom"
-      ]
+    "collectCoverage": true,
+    "coverageReporters": [
+      "text",
+      "lcov",
+      "clover"
+    ],
+    "testPathDirs": [ "src" ], 
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/bluebird",
+      "<rootDir>/node_modules/lodash",
+      "<rootDir>/node_modules/react",
+      "<rootDir>/node_modules/react-addons-test-utils",
+      "<rootDir>/node_modules/react-dom"
+    ]
   }
 }

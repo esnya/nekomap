@@ -1,5 +1,6 @@
 *
 !.gitignore
 !default.yml
+!test.yml
 !development.yml
 !production.yml

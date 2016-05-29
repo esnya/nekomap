@@ -1,0 +1,11 @@
+listen:
+    host: 0.0.0.0
+    port: 80
+log4js:
+    appenders:
+        - category: access
+          type: console
+        - category: system
+          type: console
+        - category: error
+          type: console
