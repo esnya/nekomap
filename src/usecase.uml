@@ -13,7 +13,7 @@ O <.. (Scale object)
 O <.. (Translate object)
 O <.. (Rotate object around the Y axis)
 
-note "Object:\n\tSolid primitives\n\tPlane shapes\n\tCharacter merker\n\Text billboard" as ON
+note "Object:\n\tSolid primitives\n\tPlane shapes\n\tCharacter merker\n\tText billboard" as ON
 (O) .. ON 
 
 note "Share with all in room" as SHARE

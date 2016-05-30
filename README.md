@@ -1,7 +1,7 @@
 # Design of Nekovision
 
 ```sh
-java -jar plantuml.jar -v -o ../dist -Tsvg ./src/*.uml
+java -jar plantuml.jar -v -o ../dist -tsvg ./src/*.uml
 ```
 
 ## Usecase
@@ -9,6 +9,7 @@ java -jar plantuml.jar -v -o ../dist -Tsvg ./src/*.uml
 ![Usecase](https://rawgithub.com/ukatama/nekovision/design/dist/usecase.svg)
 
 ## Class
+### Concept
 ![Class1](dist/class1.svg)
 ![Class1](https://rawgithub.com/ukatama/nekovision/design/dist/class1.svg)
 

@@ -36,13 +36,13 @@ class Camera {
 
 class Room {
     +size : Vector
-    +ground : Ground
+    +terrain : Terrain
     +objects : Object[]
 
     +setSize(size : Vector)
 }
 
-class Ground {
+class Terrain {
     +heights : Number[][]
     +setHeight(x : Number, z : Number, hight : Number)
     +draw()
@@ -63,10 +63,10 @@ class Object {
 Client "0..*" o-- "1" Room
 Client "1" *-- "1" Camera
 
-Room "1" *-- "1" Ground
+Room "1" *-- "1" Terrain
 Room "1" *-- "0..*" Object
 
-Ground <-- Client : draw
+Terrain <-- Client : draw
 Object <-- Client : draw
 
 @enduml
