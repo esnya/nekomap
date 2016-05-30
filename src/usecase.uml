@@ -1,23 +1,22 @@
 @startuml
 
-ユーザー -> (カメラを操作)
+User -> (Control camera)
 
-(地面の高さを変更) as (G1)
-ユーザー -> (G1)
+(Increase/Decrease height of terrain) as (G1)
+User -> (G1)
 
-(オブジェクトを操作) as (O)
-(O) <- ユーザー
+(Edit Objects) as (O)
+(O) <- User
 
-O <.. (オブジェクトを設置) 
-O <.. (オブジェクトの大きさを変更)
-O <.. (オブジェクトの位置を変更)
-O <.. (オブジェクトを垂直軸周りで回転)
+O <.. (Place new object) 
+O <.. (Scale object)
+O <.. (Translate object)
+O <.. (Rotate object around the Y axis)
 
-
-note "オブジェクト:\n\t立体プリミティブ図形\n\t平面図形\n\tキャラクターマーカー\n\t文字列ビルボード" as ON
+note "Object:\n\tSolid primitives\n\tPlane shapes\n\tCharacter merker\n\Text billboard" as ON
 (O) .. ON 
 
-note "部屋内全員が共有" as SHARE
+note "Share with all in room" as SHARE
 (G1) .. SHARE
 (O) .. SHARE
 
