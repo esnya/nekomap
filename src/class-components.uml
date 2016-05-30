@@ -42,23 +42,49 @@ namespace components {
         +constructor({ mode : String, editor : Object, scene : THREE.Scene, camera : THREE.Camera })
     }
     Canvas "1" *-- "1" THREE.Renderer
-    Canvas --> actions.object.Create : if mode is CREATE
-    Canvas --> actions.object.Rotate : if mode is OBJECTEDIT/ROTATE
-    Canvas --> actions.object.Scale : if mode is OBJECTEDIT/SCALE
-    Canvas --> actions.object.Translate : if mode is OBJECTEDIT/TRANSALATE
-    Canvas --> actions.object.Remove : if mode is OBJECTEDIT
-    Canvas --> actions.objecteditor.Select : if mode is OBJECTEDIT
-    Canvas --> actions.terraineditor.Select : if mode is TERRAIN
-    Canvas --> actions.terrain.SetHeight : if mode is TERRAIN
-    Canvas --> actions.camera.Zoom : if mode is VIEW
-    Canvas --> actions.camera.Rotate : if mode is VIEW
-    Canvas --> actions.camera.Translate : if mode is VIEW
+    Canvas "1" -- "1" canvascontroller.CanvasController
 
     class RoomConfigDialog <<Component>> {
         +conctructor({ room : { title : String, size : Number }, open : boolean })
     }
     App "1" *-- "1" RoomConfigDialog
     RoomConfigDialog --> actions.room.Update
+}
+
+namespace canvascontroller {
+    class CanvasController {
+        +create(type : Any)
+        +select(id : Any)
+        +rotate(id : Any, angle : Number)
+        +scale(id : Any, scale : Vector)
+        +translate(id : Any, translate : Vector)
+        +remove(id : Any)
+        {static} +register(mode : ModeType, controller : CanvasController)
+        {static} +get(mode : ModeType)
+    }
+
+    class ViewController {
+    }
+    CanvasController <|.. ViewController
+    ViewController --> actions.camera.Zoom
+    ViewController --> actions.camera.Rotate
+    ViewController --> actions.camera.Translate
+
+    class TerrainController {
+    }
+    CanvasController <|.. TerrainController
+    TerrainController --> actions.terraineditor.Select
+    TerrainController --> actions.terrain.SetHeight
+
+    class ObjectController {
+    }
+    CanvasController <|.. ObjectController
+    ObjectController --> actions.objecteditor.Select
+    ObjectController --> actions.object.Create
+    ObjectController --> actions.object.Rotate
+    ObjectController --> actions.object.Scale
+    ObjectController --> actions.object.Translate
+    ObjectController --> actions.object.Remove
 }
 
 @enduml

@@ -74,6 +74,14 @@ namespace actions {
         }
     }
 
+    namespace terraineditor {
+        class Select <<action>> {
+            +type : String = 'TERRAIN_EDITOR_SELECT';
+            +payload : { x : Number, z : Number }
+            {static} +create(x : Number, z : Number) : Action
+        }
+    }
+
     namespace mode {
         class Mode <<action>> {
             +type : String = 'MODE_MODE';
@@ -155,14 +163,6 @@ namespace actions {
         note bottom of Mode
             Payload means mode
         end note
-    }
-
-    namespace terraineditor {
-        class Select <<action>> {
-            +type : String = 'TERRAIN_EDITOR_SELECT';
-            +payload : { x : Number, z : Number }
-            {static} +create(x : Number, z : Number) : Action
-        }
     }
 }
 
