@@ -15,6 +15,8 @@ describe('actions', () => {
             table[name] = require(`../${name}`);
         });
 
+    const types = {};
+
     Object.keys(table)
         .forEach((name) => {
             describe(name, () => {
@@ -23,11 +25,16 @@ describe('actions', () => {
                 Object.keys(actions)
                     .forEach((key) => {
                         if (key.match(/^[A-Z0-9_]+$/)) {
+                            const value = actions[key];
+
                             describe(key, () => {
                                 it('is action type string', () => {
-                                    expect(actions[key]).toMatch(/^[A-Z0-9_]+$/);
+                                    expect(value).toMatch(/^[A-Z0-9_]+$/);
                                 });
                             });
+
+                            if (!(value in types)) types[value] = 0;
+                            types[value]++;
                         } else if (key.match(/^[a-z][a-zA-Z0-9]*$/)) {
                             describe(key, () => {
                                 it('is action creator', () => {
@@ -38,4 +45,15 @@ describe('actions', () => {
                     });
             });
         });
+
+    describe('type', () => {
+        Object.keys(types)
+            .forEach((type) => {
+                describe(type, () => {
+                    it('is unique', () => {
+                        expect(types[type]).toBe(1);
+                    });
+                });
+            });
+    });
 });
