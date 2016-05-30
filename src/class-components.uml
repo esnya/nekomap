@@ -1,46 +1,64 @@
 @startuml
+page 1x2
 !include class-common.iuml
 
 namespace components {
-    class App {
+    class App <<Component>> {
         +constructor({ title : String })
     }
 
-    class Toolbar {
+    class Toolbar <<Component>> {
         +constructor({})
     }
 
     App "1" *-- "1" Canvas
     App "1" *-- "1" Toolbar
 
-    class ModePalette {
+    class ModePalette <<Component>> {
         +constructor({ mode : ModeType })
     }
+    Toolbar "1" *-- "1" ModePalette
     ModePalette --> actions.mode.Mode
 
-    class ObjectPalette {
+    class ObjectTypePalette <<Component>> {
         +constructor({ type : ObjectType })
     }
-    ObjectPalette --> actions.editor.type
+    Toolbar "1" *-- "0..1" ObjectTypePalette
+    note top of ObjectTypePalette
+        Visible if mode is CREATE
+    end note
 
-    class ManipulatorPalette {
-        +constructor({ manipulator : ManipulatorType })
+    class ObjectEditorModePalette <<Component>> {
+        +constructor({ mode : ObjectEditorMode })
     }
-    ManipulatorPalette --> actions.editor.manipulator
+    Toolbar "1" *-- "0..1" ObjectEditorModePalette
+    ObjectEditorModePalette --> actions.objecteditor.Mode
+    note top of ObjectEditorModePalette
+        Visible if mode is OBJECTEDIT
+    end note
 
-    Toolbar "1" *-- "1" ModePalette
-    Toolbar "1" *-- "1" ObjectPalette
-    Toolbar "1" *-- "1" ManipulatorPalette
-
-    class Canvas {
+    class Canvas <<Component>> {
         -renderer : THREE.Renderer
         +constructor({ mode : String, editor : Object, scene : THREE.Scene, camera : THREE.Camera })
     }
     Canvas "1" *-- "1" THREE.Renderer
     Canvas --> actions.object.Create : if mode is CREATE
-    Canvas --> actions.object.Rotate : if mode is EDIT and editor.manipulator is ROTATE
-    Canvas --> actions.object.Scale : if mode is EDIT and editor.manipulator is SCALE
-    Canvas --> actions.object.Translate : if mode is EDIT and editor.manipulator is TRANSALATE
+    Canvas --> actions.object.Rotate : if mode is OBJECTEDIT/ROTATE
+    Canvas --> actions.object.Scale : if mode is OBJECTEDIT/SCALE
+    Canvas --> actions.object.Translate : if mode is OBJECTEDIT/TRANSALATE
+    Canvas --> actions.object.Remove : if mode is OBJECTEDIT
+    Canvas --> actions.objecteditor.Select : if mode is OBJECTEDIT
+    Canvas --> actions.terraineditor.Select : if mode is TERRAIN
+    Canvas --> actions.terrain.SetHeight : if mode is TERRAIN
+    Canvas --> actions.camera.Zoom : if mode is VIEW
+    Canvas --> actions.camera.Rotate : if mode is VIEW
+    Canvas --> actions.camera.Translate : if mode is VIEW
+
+    class RoomConfigDialog <<Component>> {
+        +conctructor({ room : { title : String, size : Number }, open : boolean })
+    }
+    App "1" *-- "1" RoomConfigDialog
+    RoomConfigDialog --> actions.room.Update
 }
 
 @enduml

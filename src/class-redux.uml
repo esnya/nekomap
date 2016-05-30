@@ -10,10 +10,11 @@ Store "1" *-- "1" reducers.Reducer
 namespace reducers {
     class Reducer <<reducer>> {
         +camera : Camera
-        +editor : Editor
         +mode : Mode
         +room : Room
         +scene : Scene
+        +objecteditor : ObjectEditor
+        +terraineditor : TerrainEditor
     }
 
     class Camera <<reducer>> {
@@ -22,14 +23,21 @@ namespace reducers {
     Reducer "1" *-- "1" Camera
     Camera <-- actions.camera.Rotate : Set state.rotation
     Camera <-- actions.camera.Translate :  Set state.position
+    Camera <-- actions.camera.Zoom :  Set state.zoom(?)
     Camera "1" *-- "1" THREE.Camera
 
-    class Editor <<reducer>> {
-        +state : { selected : String, manipulator: ManipulatorType }
+    class ObjectEditor <<reducer>> {
+        +state : { selected : String, mode: ObjectEditModeType }
     }
-    Reducer "1" *-- "1" Editor
-    Editor <-- actions.editor.Select : Set state.selected
-    Editor <-- actions.editor.Manipulator : Set state.manipulator
+    Reducer "1" *-- "1" ObjectEditor
+    ObjectEditor <-- actions.objecteditor.Select : Set state.selected
+    ObjectEditor <-- actions.objecteditor.Mode : Set state.mode
+
+    class TerrainEditor <<reducer>> {
+        +state : { selected : { x : Number, y : Numer } }
+    }
+    Reducer "1" *-- "1" TerrainEditor
+    TerrainEditor <-- actions.terraineditor.Select : Set state.selected
 
     class Mode <<reducer>> {
         +state : String
@@ -47,12 +55,12 @@ namespace reducers {
         +state : THREE.Scene
     }
     Reducer "1" *-- "1" Scene
-    Scene <-- actions.ground.SetHeight : Update ground geometry
+    Scene <-- actions.terrain.SetHeight : Update terrain geometry
     Scene <-- actions.object.Create : Add new Obj
     Scene <-- actions.object.Translate : Set obj[id].position
     Scene <-- actions.object.Rotate : Set obj[id].rotation
+    Scene <-- actions.object.Scale : Set obj[id].scale
     Scene <-- actions.object.Remove : Remove obj[id]
-    Scene <-- actions.editor.Select : Set obj[i] selected
     Scene "1" *-- "1" THREE.Scene
 }
 

@@ -18,11 +18,12 @@ enum ObjectType {
 
 enum ModeType {
     VIEW
+    TERRAIN
     CREATE
-    EDIT
+    OBJECTEDIT
 }
 
-enum ManipulatorType {
+enum ObjectEditorModeType {
     ROTATE
     SCALE
     TRANSALATE
@@ -53,11 +54,20 @@ namespace actions {
         note bottom of Translate
             Payload means position
         end note
+
+        class Zoom <<action>> {
+            +type : String = 'CAMERA_ZOOM'
+            +payload : Number
+            {static} +create(zoom : Number) : Action
+        }
+        note bottom of Zoom
+            Payload means zoom
+        end note
     }
 
-    namespace ground {
+    namespace terrain {
         class SetHeight <<action>> {
-            +type : String = 'GROUND_SET_HEIGHT'
+            +type : String = 'terrain_SET_HEIGHT'
             +payload : { x : Number, y : Number, height : Number }
             +meta : { sync : boolean = true }
             {static} +create(x : Number, y : Number, height : Number) : Action
@@ -72,26 +82,6 @@ namespace actions {
         }
         note bottom of Mode
             Payload means mode
-        end note
-    }
-
-    namespace editor {
-        class Select <<action>> {
-            +type : String = 'EDITOR_SELECT';
-            +payload : String
-            {static} +create(id : String) : Action
-        }
-        note bottom of Select
-            Payload means id
-        end note
-
-        class Manipulator <<action>> {
-            +type : String = 'EDITOR_MANIPULATOR'
-            +payload : ManipulatorType
-            {static} +create(manipulator : ManipulatorType)
-        }
-        note bottom of Manipulator
-            Payload means manipulator
         end note
     }
 
@@ -117,6 +107,16 @@ namespace actions {
             {static} +create(id : String, angle : Number) : Action
         }
 
+        class Scale <<action>> {
+            +type : String = 'OBJECT_SCALE'
+            +paylaod : Vector
+            +meta : { sync : boolean = true }
+            {static} +create(scale : Vector) : Action
+        }
+        note bottom of Scale
+            Payload means scale
+        end note
+
         class Remove <<action>> {
             +type : String = 'OBJECT_REMOVE'
             +paylaod : String
@@ -134,6 +134,34 @@ namespace actions {
             +payload : { title : String, size : Vector }
             +meta : { sync : boolean = true }
             {static} +create(title : String, size : Vector) : Action
+        }
+    }
+
+    namespace objecteditor {
+        class Select <<action>> {
+            +type : String = 'OBJECT_EDITOR_SELECT';
+            +payload : String
+            {static} +create(id : String) : Action
+        }
+        note bottom of Select
+            Payload means id
+        end note
+
+        class Mode <<action>> {
+            +type : String = 'OBJECT_EDITOR_MODE'
+            +payload : ObjectEditorModeType
+            {static} +create(mode : ObjectEditorModeType)
+        }
+        note bottom of Mode
+            Payload means mode
+        end note
+    }
+
+    namespace terraineditor {
+        class Select <<action>> {
+            +type : String = 'TERRAIN_EDITOR_SELECT';
+            +payload : { x : Number, z : Number }
+            {static} +create(x : Number, z : Number) : Action
         }
     }
 }
