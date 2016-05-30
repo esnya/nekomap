@@ -1,48 +1,5 @@
 @startuml
-enum ObjectType {
-    -- 3D Primitives --
-    CONE
-    CUBOID
-    CYLINDER
-    SPHERE
-    -- 2D Primitives --
-    CIRCLE
-    ELLIPSE
-    LINE
-    POLYLINE
-    POLYGON
-    RECTANGLE
-    -- Others --
-    CHARACTER
-    TEXT
-}
-
-enum ModeType {
-    VIEW
-    CREATE
-    EDIT
-}
-
-enum ManipulatorType {
-    ROTATE
-    SCALE
-    TRANSALATE
-}
-
-class Vector <<struct>> {
-    +x : Number
-    +y : Number
-    +z : Number
-}
-
-namespace actions {
-    namespace object {
-    }
-    namespace mode {
-    }
-    namespace editor {
-    }
-}
+!include class-common.iuml
 
 namespace components {
     class App {
@@ -84,48 +41,6 @@ namespace components {
     Canvas --> actions.object.Rotate : if mode is EDIT and editor.manipulator is ROTATE
     Canvas --> actions.object.Scale : if mode is EDIT and editor.manipulator is SCALE
     Canvas --> actions.object.Translate : if mode is EDIT and editor.manipulator is TRANSALATE
-}
-
-namespace graphics {
-    class Obj {
-        +id : String
-        +type : ObjectType
-        +position : Vector
-        +size : Vector
-        +rotation : Vector
-        +text : String
-        +timestamp : Number
-    }
-    THREE.Mesh <|.. Obj
-}
-
-package THREE {
-    class Scene {
-        +add(mesh : Mesh)
-    }
-
-    class Camera {
-    }
-
-    class Geometry {
-    }
-
-    class Material {
-    }
-
-    class Mesh {
-        +position : Vector
-        +rotation : Vector
-    }
-
-    class Renderer {
-        +render(scene : Scene, camera : Camera)
-    }
-
-    Mesh "1" o-- "1" Geometry
-    Mesh "1" o-- "1" Material
-
-    Scene "1" o-- "0..*" Mesh
 }
 
 @enduml
