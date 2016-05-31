@@ -6,5 +6,8 @@
 [![Dependencies](https://img.shields.io/david/ukatama/nekovision.svg?style=flat-square)](https://david-dm.org/ukatama/nekovision)
 [![DevDependencies](https://img.shields.io/david/dev/ukatama/nekovision.svg?style=flat-square)](https://david-dm.org/ukatama/nekovision#info=devDependencies&view=list)
 
-Online map editor for Tabletop-RPG.
+Online 3D map editor for Tabletop-RPG.
 
+Working in progress...
+
+System design documents can be found [here](http://ukatama.github.io/nekovision/design/).
