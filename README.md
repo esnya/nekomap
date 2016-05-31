@@ -10,4 +10,4 @@ Online 3D map editor for Tabletop-RPG.
 
 Working in progress...
 
-System design documents can be found [here](http://ukatama.github.io/nekovision/design/).
+System design materials are located in [http://ukatama.github.io/nekovision/design/](http://ukatama.github.io/nekovision/design/).
