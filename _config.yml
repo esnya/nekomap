@@ -1,0 +1,7 @@
+exclude:
+    - coverage
+    - Dockerfile
+    - design/src
+    - dist
+    - lib
+    - node_modules
