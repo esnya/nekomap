@@ -3,7 +3,5 @@ layout: default
 title: Nekovision
 ---
 
-# Nekovision
-
-## Contents
+# Contents
 - [System Desgin](design)
