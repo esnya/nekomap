@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Design of Nekovision
+title: Design of Nekomap
 ---
 
-# Design of Nekovision
+# Design of Nekomap
 
 ```sh
 java -jar plantuml.jar -v -o ../dist -tsvg ./src/*.uml

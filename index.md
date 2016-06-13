@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Nekovision
+title: Nekomap
 ---
 
 # Contents
