@@ -1,5 +1,5 @@
 {
-  "name": "nekovision",
+  "name": "nekomap",
   "version": "0.0.0",
   "description": "Online map editor for Tabletop-RPG",
   "main": "index.js",
@@ -23,14 +23,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ukatama/nekovision.git"
+    "url": "git+https://github.com/ukatama/nekomap.git"
   },
   "author": "ukatama",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ukatama/nekovision/issues"
+    "url": "https://github.com/ukatama/nekomap/issues"
   },
-  "homepage": "https://github.com/ukatama/nekovision#readme",
+  "homepage": "https://github.com/ukatama/nekomap#readme",
   "devDependencies": {
     "babel-cli": "^6.9.0",
     "babel-jest": "^12.1.0",
