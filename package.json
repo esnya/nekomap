@@ -17,7 +17,7 @@
     "watch:bael": "babel -w -s true -d lib src",
     "watch:eslint": "nodemon ./node_modules/eslint/bin/eslint.js --color --ignore-pattern **/__tests__/**/* --ignore-pattern scripts/**/* .",
     "watch:eslint-jest": "nodemon ./node_modules/eslint/bin/eslint.js --color -c ./.eslintrc.jest.yml ./src/**/__tests__/**/*",
-    "watch:jest": "node ./scripts/jest.js --color --watch",
+    "watch:jest": "nodemon --exec \"jest --color\"",
     "watch:server": "nodemon ./index.js",
     "watch:webpack": "webpack --watch"
   },
@@ -44,6 +44,7 @@
     "eslint-plugin-import": "^1.8.1",
     "eslint-plugin-jsx-a11y": "^1.2.2",
     "eslint-plugin-react": "^5.1.1",
+    "jasmine-immutablejs-matchers": "^0.1.2",
     "jest-cli": "^12.1.1",
     "nodemon": "^1.9.2",
     "npm-run-all": "^2.1.1",
@@ -53,6 +54,7 @@
     "config": "^1.20.4",
     "express": "^4.13.4",
     "jade": "^1.11.0",
+    "lodash": "^4.13.1",
     "log4js": "^0.6.36",
     "material-ui": "^0.15.0",
     "react": "^15.1.0",
@@ -63,6 +65,7 @@
     "redis": "^2.6.0-2",
     "redux": "^3.5.2",
     "redux-actions": "^0.9.1",
+    "redux-logger": "^2.6.1",
     "redux-promise": "^0.5.3",
     "socket.io": "^1.4.6",
     "socket.io-client": "^1.4.6",
@@ -76,10 +79,16 @@
       "lcov",
       "clover"
     ],
-    "testPathDirs": [ "src" ], 
+    "setupTestFrameworkScriptFile": "<rootDir>/jest/setup.js",
+    "testPathDirs": [
+      "src"
+    ],
     "unmockedModulePathPatterns": [
       "<rootDir>/node_modules/bluebird",
+      "<rootDir>/node_modules/immutable",
       "<rootDir>/node_modules/lodash",
+      "<rootDir>/node_modules/redux",
+      "<rootDir>/node_modules/redux-actions",
       "<rootDir>/node_modules/react",
       "<rootDir>/node_modules/react-addons-test-utils",
       "<rootDir>/node_modules/react-dom"
