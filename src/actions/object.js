@@ -1,7 +1,11 @@
 import { createAction } from 'redux-actions';
+import { generate } from 'shortid';
 
 export const CREATE = 'OBJECT_CREATE';
-export const create = createAction(CREATE, 'object');
+export const create = createAction(CREATE, (object) => ({
+    ...object,
+    id: generate(),
+}));
 
 export const REMOVE = 'OBJECT_REMOVE';
 export const remove = createAction(REMOVE, 'id');

@@ -1,15 +1,25 @@
-import { fromJS, List } from 'immutable';
 import { handleActions } from 'redux-actions';
+import THREE from 'three';
+import Obj from '../graphics/object';
 import * as Actions from '../actions/object';
 
-const update =
-    (state, { payload }) =>
-        state.map((item) => (item.get('id') === payload.id ? item.merge(fromJS(payload)) : item));
+const byId = (handler) => (objects, { payload }) => {
+    const object = objects.getObjectByName(payload.id);
+
+    if (object) handler(objects, object, payload);
+
+    return objects;
+};
 
 export default handleActions({
-    [Actions.CREATE]: (state, { payload }) => state.push(fromJS(payload)),
-    [Actions.REMOVE]: (state, { payload }) => state.filter((item) => item.get('id') !== payload),
-    [Actions.ROTATE]: update,
-    [Actions.TRANSLATE]: update,
-    [Actions.SCALE]: update,
-}, new List());
+    [Actions.CREATE]: (objects, { payload }) => {
+        objects.add(new Obj(payload));
+        return objects;
+    },
+    [Actions.REMOVE]: byId((objects, object) => objects.remove(object)),
+    [Actions.ROTATE]:
+        byId((objects, object, { angle }) => object.rotateY(THREE.Math.degToRad(angle))),
+    [Actions.TRANSLATE]:
+        byId((objects, object, { position }) => object.position.fromArray(position)),
+    [Actions.SCALE]: byId((objects, object, { scale }) => object.scale.fromArray(scale)),
+}, new THREE.Object3D());
