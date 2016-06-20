@@ -15,10 +15,10 @@
     "start": "node .",
     "watch": "run-p -l watch:*",
     "watch:bael": "babel -w -s true -d lib src",
-    "watch:eslint": "nodemon ./node_modules/eslint/bin/eslint.js --color --ignore-pattern **/__tests__/**/* --ignore-pattern scripts/**/* .",
-    "watch:eslint-jest": "nodemon ./node_modules/eslint/bin/eslint.js --color -c ./.eslintrc.jest.yml ./src/**/__tests__/**/*",
-    "watch:jest": "nodemon --exec \"jest --color\"",
-    "watch:server": "nodemon ./index.js",
+    "watch:eslint": "nodemon --ignore lib/ --ignore dist/ ./node_modules/eslint/bin/eslint.js --color --ignore-pattern **/__tests__/**/* --ignore-pattern scripts/**/* .",
+    "watch:eslint-jest": "nodemon --ignore lib/ --ignore dist/ ./node_modules/eslint/bin/eslint.js --color -c ./.eslintrc.jest.yml ./src/**/__tests__/**/*",
+    "watch:jest": "nodemon --ignore lib/ --ignore dist/ --exec \"jest --color\"",
+    "watch:server": "nodemon --ignore src/ ./index.js",
     "watch:webpack": "webpack --watch"
   },
   "repository": {
@@ -67,6 +67,7 @@
     "redux-actions": "^0.9.1",
     "redux-logger": "^2.6.1",
     "redux-promise": "^0.5.3",
+    "shortid": "^2.2.6",
     "socket.io": "^1.4.6",
     "socket.io-client": "^1.4.6",
     "source-map-support": "^0.4.0",
