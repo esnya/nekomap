@@ -27,8 +27,8 @@ const CameraControl = (props) => {
                 <button onClick={() => onTranslate([0, 0, 1])}>↓</button>
             </div>
             <div>
-                <button onClick={() => onRotate(-5)}>↻</button>
-                <button onClick={() => onRotate(5)}>↺</button>
+                <button disabled onClick={() => onRotate(-5)}>↻</button>
+                <button disabled onClick={() => onRotate(5)}>↺</button>
                 <button onClick={() => onZoom(1)}>🔍+</button>
                 <button onClick={() => onZoom(-1)}>🔍-</button>
             </div>

@@ -3,6 +3,7 @@ import connect from '../connectors/canvas';
 import pureRender from '../enhancers/pureRender';
 import Renderer from '../graphics/Renderer';
 import Scene from '../graphics/Scene';
+import Terrain from '../graphics/Terrain';
 
 const Style = {
     width: '100%',
@@ -30,6 +31,10 @@ class Canvas extends Component {
         adjustSize();
 
         const scene = new Scene();
+
+        const terrain = new Terrain();
+        scene.add(terrain);
+
         scene.add(objects);
 
         this.isAlive = true;

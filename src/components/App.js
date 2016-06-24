@@ -6,6 +6,7 @@ import CameraControl from './CameraControl';
 const Style = {
     Container: {
         display: 'flex',
+        height: '100%',
     },
     Fixed: {
         flex: '0 0 auto',
